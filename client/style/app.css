@@ -1,0 +1,20 @@
+.notification-cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3em;
+    background-color: #fcfff9;
+}
+
+.notification-bar {
+    padding: .1em 0;
+    height: 1em;
+    width: 25%;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#fal {
+    visibility: hidden;
+}
