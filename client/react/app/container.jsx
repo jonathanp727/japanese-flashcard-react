@@ -2,15 +2,13 @@ import { connect } from 'react-redux';
 import App from './App';
 import { } from '../../redux/actions';
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
+const mapStateToProps = state => ({
+  notification: state.page.notification,
+  isDoingFlashcards: state.page.isDoingFlashcards
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
+const mapDispatchToProps = dispatch => ({
+});
 
 const AppContainer = connect(
   mapStateToProps,
