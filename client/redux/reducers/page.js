@@ -6,7 +6,8 @@ import {
   CONNECTION_FAILURE,
   RECIEVE_CREATE_DECK,
   RECIEVE_CREATE_CARD,
-  OPEN_CREATECARDPANEL
+  OPEN_CREATECARDPANEL,
+  REQUEST_CARDS
 } from '../actions';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   loginError: '',
   fetchDeckError: false,
   createDeckPanelIsOpen: false,
+  viewCardsPanelIsOpen: false,
   createCardPanelIsOpen: false,
   isDoingFlashcards: false
 };
@@ -35,7 +37,9 @@ const pageReducer = (state = initialState, action) => {
     case RECIEVE_CREATE_CARD:
       return Object.assign({}, state, { notification: 'false', createCardPanelIsOpen: false });
     case OPEN_CREATECARDPANEL:
-      return Object.assign({}, state, { createCardPanelIsOpen: !state.createCardPanelIsOpen });
+      return Object.assign({}, state, { createCardPanelIsOpen: !state.createCardPanelIsOpen, viewCardsPanelIsOpen: false });
+    case REQUEST_CARDS:
+      return Object.assign({}, state, { viewCardsPanelIsOpen: !state.viewCardsPanelIsOpen, createCardPanelIsOpen: false });
     default:
       return state;
   }

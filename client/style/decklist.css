@@ -1,3 +1,7 @@
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 .decklist {
     margin-top: 5%;
     width: 70%;
@@ -225,6 +229,50 @@ textarea:active {
     justify-content: flex-end;
 }
 
-.createcard-button-cont button {
+.viewcards-panel {
+    background-color: #bcccc3;
+    height: 8em;
+    display: flex;
+    justify-content: flex-start;
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, .4) inset;
+    overflow: scroll;
+}
 
+.viewcards-panel .card-cont {
+    height: 100%;
+    width: 7em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.viewcards-panel .card {
+    margin: 0 .5em;
+    margin-top: 1em;
+    height: 5em;
+    width: 5em;
+    background-color: #fcfff9;
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, .4);
+    border-radius: .3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-card-button {
+    background-color: #af573c;
+    padding: 0 .5em;
+    border:  0;
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, .4);
+    color: #441f0d;
+    border-radius: 2px;
+    font-weight: 800;
+    font-size: .3em;
+    transition: background-color .2s ease-out;
+    display: block;
+    height: 2em;
+}
+
+.delete-card-button:hover {
+    background-color: #983e34;
 }

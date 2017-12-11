@@ -187,3 +187,76 @@ export function createCard(kanji, reading, gloss) {
       });
   };
 }
+
+export const REQUEST_CARDS = 'REQUEST_CARDS';
+export const requestCards = deck => ({
+  type: REQUEST_CARDS,
+  name: deck.name,
+  id: deck.id
+});
+
+export const RECIEVE_CARDS = 'RECIEVE_CARDS';
+export const recieveCards = cards => ({
+  type: RECIEVE_CARDS,
+  cards
+});
+
+export function getCards(deck) {
+  return function (dispatch, getState) {
+    dispatch(requestCards(deck));
+    if (getState().page.viewCardsPanelIsOpen) {
+      return fetch(`http://localhost:3000/api/flashcard/deck/${deck.id}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': getState().user.token
+        }
+      })
+        .then(
+          response => response.json(),
+          () => dispatch(connectionFailure())
+        )
+        .then((json) => {
+          if (json.type !== CONNECTION_FAILURE) {
+            dispatch(recieveCards(json));
+          }
+        });
+    }
+    return null;
+  };
+}
+
+export const REQUEST_DELETE_CARD = 'REQUEST_DELETE_CARD';
+export const requestDeleteCard = () => ({
+  type: REQUEST_DELETE_CARD
+});
+
+export const RECIEVE_DELETE_CARD = 'RECIEVE_DELETE_CARD';
+export const recieveDeleteCard = (id) => ({
+  type: RECIEVE_DELETE_CARD,
+  id
+});
+
+export function deleteCard(id) {
+  return function (dispatch, getState) {
+    dispatch(requestDeleteCard());
+    return fetch(`http://localhost:3000/api/flashcard/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': getState().user.token
+      }
+    })
+      .then(
+        response => response.json(),
+        () => dispatch(connectionFailure())
+      )
+      .then((json) => {
+        if (json.type !== CONNECTION_FAILURE) {
+          dispatch(recieveDeleteCard(id));
+        }
+      });
+  };
+}

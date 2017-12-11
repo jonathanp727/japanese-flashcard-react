@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CreateCardPanel from './containerCreateCardPanel';
+import ViewCardsPanel from './containerViewCardsPanel';
 
 const DeckElement = ({
   deck,
   curDeckId,
   createCardPanelIsOpen,
+  viewCardsPanelIsOpen,
   deleteDeck,
-  openCreateCardPanel
+  openCreateCardPanel,
+  getCards
 }) => (
   <li key={deck.id}>
     <div className="deck-ele">
-      <p className="deckname">{deck.name}</p>
+      <p className="deckname" onClick={() => getCards(deck)}>{deck.name}</p>
       <div className="button-cont">
         <button
           className="decklist-button"
@@ -22,6 +25,7 @@ const DeckElement = ({
       </div>
     </div>
     {createCardPanelIsOpen && curDeckId === deck.id && <CreateCardPanel />}
+    {viewCardsPanelIsOpen && curDeckId === deck.id && <ViewCardsPanel />}
   </li>
 );
 
@@ -33,7 +37,9 @@ DeckElement.propTypes = {
   curDeckId: PropTypes.number.isRequired,
   deleteDeck: PropTypes.func.isRequired,
   openCreateCardPanel: PropTypes.func.isRequired,
-  createCardPanelIsOpen: PropTypes.bool.isRequired
+  viewCardsPanelIsOpen: PropTypes.func.isRequired,
+  createCardPanelIsOpen: PropTypes.bool.isRequired,
+  getCards: PropTypes.func.isRequired
 };
 
 export default DeckElement;

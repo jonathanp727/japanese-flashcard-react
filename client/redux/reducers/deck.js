@@ -1,6 +1,9 @@
 import {
   OPEN_CREATECARDPANEL,
-  RECIEVE_TRANSLATION
+  RECIEVE_TRANSLATION,
+  REQUEST_CARDS,
+  RECIEVE_CARDS,
+  RECIEVE_DELETE_CARD
 } from '../actions';
 
 const initialState = {
@@ -25,6 +28,12 @@ const deckReducer = (state = initialState, action) => {
           }
         }
       );
+    case REQUEST_CARDS:
+      return Object.assign({}, state, { name: action.name, id: action.id, translation: null, cards: [] });
+    case RECIEVE_CARDS:
+      return Object.assign({}, state, { cards: action.cards });
+    case RECIEVE_DELETE_CARD:
+      return Object.assign({}, state, { cards: state.cards.filter(item => item.id !== action.id) });
     default:
       return state;
   }
