@@ -4,7 +4,9 @@ import {
   LOGIN_DENIED,
   OPEN_CREATEDECKPANEL,
   CONNECTION_FAILURE,
-  RECIEVE_CREATE_DECK
+  RECIEVE_CREATE_DECK,
+  RECIEVE_CREATE_CARD,
+  OPEN_CREATECARDPANEL
 } from '../actions';
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   loginError: '',
   fetchDeckError: false,
   createDeckPanelIsOpen: false,
+  createCardPanelIsOpen: false,
   isDoingFlashcards: false
 };
 
@@ -29,6 +32,10 @@ const pageReducer = (state = initialState, action) => {
       return Object.assing({}, state, { notification: 'Cannot connect to server' });
     case RECIEVE_CREATE_DECK:
       return Object.assign({}, state, { notification: 'false', createDeckPanelIsOpen: false });
+    case RECIEVE_CREATE_CARD:
+      return Object.assign({}, state, { notification: 'false', createCardPanelIsOpen: false });
+    case OPEN_CREATECARDPANEL:
+      return Object.assign({}, state, { createCardPanelIsOpen: !state.createCardPanelIsOpen });
     default:
       return state;
   }

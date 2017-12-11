@@ -114,3 +114,76 @@ export function deleteDeck(deck) {
       });
   };
 }
+
+export const REQUEST_TRANSLATION = 'REQUEST_TRANSLATION';
+export const requestTranslation = () => ({
+  type: REQUEST_TRANSLATION
+});
+
+export const RECIEVE_TRANSLATION = 'RECIEVE_TRANSLATION';
+export const recieveTranslation = json => ({
+  type: RECIEVE_TRANSLATION,
+  translation: json
+});
+
+export function getTranslation(japanese) {
+  return function (dispatch, getState) {
+    dispatch(requestTranslation());
+    return fetch(`http://localhost:3000/api/dict/?j=${japanese}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': getState().user.token
+      }
+    })
+      .then(
+        response => response.json(),
+        () => dispatch(connectionFailure())
+      )
+      .then((json) => {
+        if (json.type !== CONNECTION_FAILURE) {
+          dispatch(recieveTranslation(json));
+        }
+      });
+  };
+}
+
+export const REQUEST_CREATE_CARD = 'REQUEST_CREATE_CARD';
+export const requestCreateCard = () => ({
+  type: REQUEST_CREATE_CARD
+});
+
+export const RECIEVE_CREATE_CARD = 'RECIEVE_CREATE_CARD';
+export const recieveCreateCard = () => ({
+  type: RECIEVE_CREATE_CARD
+});
+
+export function createCard(kanji, reading, gloss) {
+  return function (dispatch, getState) {
+    dispatch(requestCreateCard());
+    return fetch('http://localhost:3000/api/flashcard/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': getState().user.token
+      },
+      body: JSON.stringify({
+        'kanji': kanji,
+        'reading': reading,
+        'pos': null,
+        'gloss': gloss,
+        'deckId': getState().deck.id
+      })
+    })
+      .then(
+        response => response.json(),
+        () => dispatch(connectionFailure())
+      )
+      .then((json) => {
+        if (json.type !== CONNECTION_FAILURE) {
+          dispatch(recieveCreateCard());
+        }
+      });
+  };
+}
