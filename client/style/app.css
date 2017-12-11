@@ -18,3 +18,17 @@
 #fal {
     visibility: hidden;
 }
+
+.body {
+    position: fixed;
+    background-color: #fcfff9;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#loggedout {
+    height: 100%;
+    padding-top: 25%;
+}

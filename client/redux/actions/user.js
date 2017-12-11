@@ -38,7 +38,7 @@ export function login(username, password) {
           dispatch(loginDenied());
         } else if (json.type !== LOGIN_FAILED) {
           dispatch(loginSucceeded(json, username));
-          // dispatch(fetchDecks(json.id));
+          dispatch(fetchDecks(json.id));
         }
       });
   };

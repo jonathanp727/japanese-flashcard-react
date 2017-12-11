@@ -4,7 +4,8 @@ import { } from '../../redux/actions';
 
 const mapStateToProps = state => ({
   notification: state.page.notification,
-  isDoingFlashcards: state.page.isDoingFlashcards
+  isDoingFlashcards: state.page.isDoingFlashcards,
+  isLoggedIn: !!state.user.name
 });
 
 const mapDispatchToProps = dispatch => ({

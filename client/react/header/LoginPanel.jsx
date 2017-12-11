@@ -14,7 +14,7 @@ const LoginPanel = ({ login, loginError, handleSubmit }) => (
 
 LoginPanel.propTypes = {
   login: PropTypes.func.isRequired,
-  loginError: PropTypes.func.isRequired,
+  loginError: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired
 };
 
