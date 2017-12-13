@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 // import { reduxForm } from 'redux-form';
 import DeckElement from './DeckElement';
-import { openCreateCardPanel, deleteDeck, getCards } from '../../redux/actions';
+import { openCreateCardPanel, openFlashCardPanel, deleteDeck, getCards } from '../../redux/actions';
 
 const mapStateToProps = state => ({
   createCardPanelIsOpen: state.page.createCardPanelIsOpen,
@@ -11,6 +11,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   openCreateCardPanel: deck => dispatch(openCreateCardPanel(deck)),
+  openFlashCardPanel: (deck) => {
+    dispatch(getCards(deck));
+    dispatch(openFlashCardPanel(deck));
+  },
   deleteDeck: deck => dispatch(deleteDeck(deck)),
   getCards: deck => dispatch(getCards(deck))
 });

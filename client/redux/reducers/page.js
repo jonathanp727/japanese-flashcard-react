@@ -7,7 +7,10 @@ import {
   RECIEVE_CREATE_DECK,
   RECIEVE_CREATE_CARD,
   OPEN_CREATECARDPANEL,
-  REQUEST_CARDS
+  REQUEST_CARDS,
+  OPEN_FLASHCARDPANEL,
+  EXIT_FLASHCARDPANEL,
+  NEXT_ACTION
 } from '../actions';
 
 const initialState = {
@@ -17,7 +20,8 @@ const initialState = {
   createDeckPanelIsOpen: false,
   viewCardsPanelIsOpen: false,
   createCardPanelIsOpen: false,
-  isDoingFlashcards: false
+  isDoingFlashcards: false,
+  showAnswer: false
 };
 
 const pageReducer = (state = initialState, action) => {
@@ -37,9 +41,29 @@ const pageReducer = (state = initialState, action) => {
     case RECIEVE_CREATE_CARD:
       return Object.assign({}, state, { notification: 'false', createCardPanelIsOpen: false });
     case OPEN_CREATECARDPANEL:
-      return Object.assign({}, state, { createCardPanelIsOpen: !state.createCardPanelIsOpen, viewCardsPanelIsOpen: false });
+      return Object.assign(
+        {},
+        state,
+        {
+          createCardPanelIsOpen: !state.createCardPanelIsOpen,
+          viewCardsPanelIsOpen: false
+        }
+      );
     case REQUEST_CARDS:
-      return Object.assign({}, state, { viewCardsPanelIsOpen: !state.viewCardsPanelIsOpen, createCardPanelIsOpen: false });
+      return Object.assign(
+        {},
+        state,
+        {
+          viewCardsPanelIsOpen: !state.viewCardsPanelIsOpen,
+          createCardPanelIsOpen: false
+        }
+      );
+    case OPEN_FLASHCARDPANEL:
+      return Object.assign({}, state, { isDoingFlashcards: true });
+    case EXIT_FLASHCARDPANEL:
+      return Object.assign({}, state, { isDoingFlashcards: false });
+    case NEXT_ACTION:
+      return Object.assign({}, state, { showAnswer: !state.showAnswer });
     default:
       return state;
   }

@@ -15,6 +15,11 @@ header {
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, .4);
     z-index: 20;
     position: relative;
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 header h1 {
@@ -109,4 +114,29 @@ button:focus {
     opacity: .1;
     display: inline-block;
     background: blue;
+}
+
+.exit-button {
+    background-color: #d17e55 !important;
+    box-shadow: 0px 1px 1px black inset;
+    border-radius: 0;
+    border: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 60px;
+    background: lightgrey;
+    height: 100%;
+    padding: 2px;
+    font-size: 1em;
+    font-weight: 100;
+    color: black;
+    transition: background-color .2s ease-out;
+}
+
+.exit-button:active {
+    box-shadow: 0px 2px 2px inset;
+}
+
+.exit-button:hover {
+    background-color: #b15640 !important;
 }

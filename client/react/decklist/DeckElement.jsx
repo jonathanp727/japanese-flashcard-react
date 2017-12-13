@@ -10,12 +10,14 @@ const DeckElement = ({
   viewCardsPanelIsOpen,
   deleteDeck,
   openCreateCardPanel,
+  openFlashCardPanel,
   getCards
 }) => (
   <li key={deck.id}>
     <div className="deck-ele">
       <p className="deckname" onClick={() => getCards(deck)}>{deck.name}</p>
       <div className="button-cont">
+        <button className="start-button" onClick={() => openFlashCardPanel(deck)}>Start Session</button>
         <button
           className="decklist-button"
           onClick={() => openCreateCardPanel(deck)}
@@ -37,7 +39,8 @@ DeckElement.propTypes = {
   curDeckId: PropTypes.number.isRequired,
   deleteDeck: PropTypes.func.isRequired,
   openCreateCardPanel: PropTypes.func.isRequired,
-  viewCardsPanelIsOpen: PropTypes.func.isRequired,
+  openFlashCardPanel: PropTypes.func.isRequired,
+  viewCardsPanelIsOpen: PropTypes.bool.isRequired,
   createCardPanelIsOpen: PropTypes.bool.isRequired,
   getCards: PropTypes.func.isRequired
 };
