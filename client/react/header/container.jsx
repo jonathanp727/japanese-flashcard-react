@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import Header from './Header';
-import { login, logout, exitFlashCardPanel } from '../../redux/actions';
+import { login, logout, register, exitFlashCardPanel } from '../../redux/actions';
 
 const mapStateToProps = state => ({
   username: state.user.name,
@@ -10,7 +10,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: values => dispatch(login(values.username, values.password)),
+  login: (values) => {
+    if (values.action === 'login') {
+      dispatch(login(values.username, values.password));
+    } else {
+      dispatch(register(values.username, values.password));
+    }
+  },
   logout: () => dispatch(logout()),
   exit: () => dispatch(exitFlashCardPanel())
 });

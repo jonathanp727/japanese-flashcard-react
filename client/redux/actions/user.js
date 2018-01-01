@@ -44,6 +44,31 @@ export function login(username, password) {
   };
 }
 
+export function register(username, password) {
+  return function (dispatch) {
+    return fetch('http://localhost:3000/api/join', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then(
+        response => response.json(),
+        () => dispatch(loginFailed())
+      )
+      .then((json) => {
+        if (json.status === 401) {
+          dispatch(loginDenied());
+        } else if (json.type !== LOGIN_FAILED) {
+          dispatch(loginSucceeded(json, username));
+          dispatch(fetchDecks(json.id));
+        }
+      });
+  };
+}
+
 export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
   type: LOGOUT
