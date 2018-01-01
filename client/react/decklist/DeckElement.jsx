@@ -15,9 +15,15 @@ const DeckElement = ({
 }) => (
   <li key={deck.id}>
     <div className="deck-ele">
-      <p className="deckname" onClick={() => getCards(deck)}>{deck.name}</p>
+      <div className="deckname-cont" onClick={() => getCards(deck)}>
+        <p className="deckname">{deck.name}</p>
+      </div>
       <div className="button-cont">
-        <button className="start-button" onClick={() => openFlashCardPanel(deck)}>Start Session</button>
+        <button
+          className="start-button"
+          onClick={() => openFlashCardPanel(deck)}
+        >Start Session
+        </button>
         <button
           className="decklist-button"
           onClick={() => openCreateCardPanel(deck)}

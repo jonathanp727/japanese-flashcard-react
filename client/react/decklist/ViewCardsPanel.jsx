@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const ViewCardsPanel = ({ cards = [], deleteCard }) => (
   <div className="viewcards-panel">
     {cards.map(card => (
-      <div className="card-cont">
+      <div className="card-cont" key={card.id}>
         <div className="card">
           <p>{card.kanji}</p>
         </div>
