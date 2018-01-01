@@ -21,7 +21,7 @@ export const loginDenied = () => ({
 
 export function login(username, password) {
   return function (dispatch) {
-    return fetch('http://localhost:3000/api/login', {
+    return fetch('/api/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -46,7 +46,7 @@ export function login(username, password) {
 
 export function register(username, password) {
   return function (dispatch) {
-    return fetch('http://localhost:3000/api/join', {
+    return fetch('/api/join', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

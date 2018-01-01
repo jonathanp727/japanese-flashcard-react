@@ -22,7 +22,7 @@ export const recieveDecks = json => ({
 export function fetchDecks(userId) {
   return function (dispatch, getState) {
     dispatch(requestDecks());
-    return fetch(`http://localhost:3000/api/deck/user/${userId}`, {
+    return fetch(`/api/deck/user/${userId}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -57,7 +57,7 @@ export const recieveCreateDeck = (name, id) => ({
 export function createDeck(deckname) {
   return function (dispatch, getState) {
     dispatch(requestCreateDeck());
-    return fetch('http://localhost:3000/api/deck/', {
+    return fetch('/api/deck/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -95,7 +95,7 @@ export const recieveDeleteDeck = deck => ({
 export function deleteDeck(deck) {
   return function (dispatch, getState) {
     dispatch(requestDeleteDeck());
-    return fetch(`http://localhost:3000/api/deck/${deck.id}`, {
+    return fetch(`/api/deck/${deck.id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -129,7 +129,7 @@ export const recieveTranslation = json => ({
 export function getTranslation(japanese) {
   return function (dispatch, getState) {
     dispatch(requestTranslation());
-    return fetch(`http://localhost:3000/api/dict/?j=${japanese}`, {
+    return fetch(`/api/dict/?j=${japanese}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -161,7 +161,7 @@ export const recieveCreateCard = () => ({
 export function createCard(kanji, reading, gloss) {
   return function (dispatch, getState) {
     dispatch(requestCreateCard());
-    return fetch('http://localhost:3000/api/flashcard/', {
+    return fetch('/api/flashcard/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -205,7 +205,7 @@ export function getCards(deck) {
   return function (dispatch, getState) {
     dispatch(requestCards(deck));
     if (getState().page.viewCardsPanelIsOpen) {
-      return fetch(`http://localhost:3000/api/flashcard/deck/${deck.id}`, {
+      return fetch(`/api/flashcard/deck/${deck.id}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -233,7 +233,7 @@ export const requestDeleteCard = () => ({
 });
 
 export const RECIEVE_DELETE_CARD = 'RECIEVE_DELETE_CARD';
-export const recieveDeleteCard = (id) => ({
+export const recieveDeleteCard = id => ({
   type: RECIEVE_DELETE_CARD,
   id
 });
@@ -241,7 +241,7 @@ export const recieveDeleteCard = (id) => ({
 export function deleteCard(id) {
   return function (dispatch, getState) {
     dispatch(requestDeleteCard());
-    return fetch(`http://localhost:3000/api/flashcard/${id}`, {
+    return fetch(`/api/flashcard/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
